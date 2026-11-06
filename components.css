@@ -1,0 +1,293 @@
+/* ============================================================
+   HOUSE BASELINE — COMPONENT PRIMITIVES
+
+   Anatomy, not appearance. Every rule below uses tokens only.
+   Claude Design reads these as the component vocabulary; a
+   project restyles them through the brand layer in tokens.css.
+
+   Naming: .hb-<component>__<part>--<variant>
+   ============================================================ */
+
+/* ---------- Reset floor ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; }
+img, svg, video { display: block; max-width: 100%; height: auto; }
+button, input, select, textarea { font: inherit; color: inherit; }
+
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+
+.hb-container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.hb-container--narrow { max-width: var(--container-narrow); }
+.hb-container--wide   { max-width: var(--container-wide); }
+
+.hb-section { padding-block: var(--section-y); }
+.hb-section--tight { padding-block: var(--section-y-tight); }
+.hb-section--loose { padding-block: var(--section-y-loose); }
+
+/* Consecutive sections on the same background collapse their
+   shared padding. Prevents the double-gap problem. */
+.hb-section + .hb-section--same-bg { padding-block-start: 0; }
+
+.hb-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+  gap: var(--grid-gap);
+}
+
+/* Vertical stack with one consistent gap. Preferred over
+   margins on children. */
+.hb-stack { display: flex; flex-direction: column; gap: var(--space-4); }
+.hb-stack--sm { gap: var(--space-2); }
+.hb-stack--lg { gap: var(--space-6); }
+.hb-stack--xl { gap: var(--space-8); }
+
+.hb-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+
+.hb-display {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  line-height: var(--leading-none);
+  letter-spacing: var(--tracking-tight);
+  max-width: var(--measure-heading);
+  text-wrap: balance;
+}
+
+.hb-h1 { font-family: var(--font-display); font-size: var(--text-3xl);
+         line-height: var(--leading-tight); letter-spacing: var(--tracking-tight);
+         max-width: var(--measure-heading); text-wrap: balance; }
+.hb-h2 { font-family: var(--font-display); font-size: var(--text-2xl);
+         line-height: var(--leading-tight); letter-spacing: var(--tracking-snug);
+         text-wrap: balance; }
+.hb-h3 { font-family: var(--font-body); font-size: var(--text-xl);
+         font-weight: var(--weight-semi); line-height: var(--leading-snug); }
+
+.hb-lead {
+  font-size: var(--text-lg);
+  line-height: var(--leading-snug);
+  color: var(--color-ink-muted);
+  max-width: var(--measure-prose);
+  text-wrap: pretty;
+}
+
+.hb-body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  max-width: var(--measure-prose);
+  text-wrap: pretty;
+}
+
+/* Small caps label above a heading. Only use when it carries
+   real information — a category, a step, a date. Not decoration. */
+.hb-eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  color: var(--color-ink-muted);
+}
+
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
+.hb-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--control-md);
+  padding: 0 var(--space-5);
+  border: var(--border-hairline) solid transparent;
+  border-radius: var(--radius-md);
+  font-weight: var(--weight-medium);
+  font-size: var(--text-sm);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color var(--dur-fast) var(--ease-standard),
+    color            var(--dur-fast) var(--ease-standard),
+    border-color     var(--dur-fast) var(--ease-standard),
+    transform        var(--dur-fast) var(--ease-out);
+}
+.hb-btn:active { transform: translateY(1px); }
+
+.hb-btn--primary {
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+.hb-btn--secondary {
+  background: transparent;
+  color: var(--color-ink);
+  border-color: var(--color-line);
+}
+.hb-btn--ghost {
+  background: transparent;
+  color: var(--color-ink);
+  padding-inline: var(--space-3);
+}
+
+.hb-btn--sm { min-height: var(--control-sm); padding-inline: var(--space-4); }
+.hb-btn--lg { min-height: var(--control-lg); padding-inline: var(--space-6);
+              font-size: var(--text-base); }
+
+.hb-btn[disabled] { opacity: 0.45; pointer-events: none; }
+
+
+/* ============================================================
+   CARD
+   ============================================================ */
+
+.hb-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border: var(--border-hairline) solid var(--color-line);
+  border-radius: var(--radius-lg);
+  transition:
+    transform    var(--dur-base) var(--ease-out),
+    box-shadow   var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-standard);
+}
+.hb-card--interactive:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+.hb-card__media { border-radius: var(--radius-md); overflow: hidden; }
+.hb-card__title { font-size: var(--text-lg); font-weight: var(--weight-semi);
+                  line-height: var(--leading-snug); }
+.hb-card__body  { font-size: var(--text-sm); line-height: var(--leading-normal);
+                  color: var(--color-ink-muted); }
+
+
+/* ============================================================
+   HEADER / NAV
+   ============================================================ */
+
+.hb-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  min-height: var(--control-lg);
+  padding-block: var(--space-3);
+  background: var(--color-bg);
+  transition:
+    background-color var(--dur-base) var(--ease-standard),
+    box-shadow       var(--dur-base) var(--ease-standard);
+}
+/* Applied by JS once the page scrolls past the hero. */
+.hb-header--condensed { box-shadow: var(--shadow-sm); }
+
+.hb-nav { display: flex; align-items: center; gap: var(--space-5); }
+.hb-nav__link {
+  position: relative;
+  font-size: var(--text-sm);
+  text-decoration: none;
+  color: var(--color-ink);
+  padding-block: var(--space-2);
+}
+/* Underline grows from the left on hover. */
+.hb-nav__link::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: var(--border-standard);
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.hb-nav__link:hover::after,
+.hb-nav__link[aria-current="page"]::after { transform: scaleX(1); }
+
+
+/* ============================================================
+   FORMS
+   ============================================================ */
+
+.hb-field { display: flex; flex-direction: column; gap: var(--space-2); }
+.hb-label { font-size: var(--text-sm); font-weight: var(--weight-medium); }
+.hb-input {
+  min-height: var(--control-md);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-bg);
+  border: var(--border-hairline) solid var(--color-line);
+  border-radius: var(--radius-md);
+  transition: border-color var(--dur-fast) var(--ease-standard);
+}
+.hb-input:hover { border-color: var(--color-ink-muted); }
+.hb-hint  { font-size: var(--text-xs); color: var(--color-ink-muted); }
+.hb-error { font-size: var(--text-xs); color: var(--color-danger); }
+/* Errors say what happened and how to fix it. Never just "Invalid". */
+
+
+/* ============================================================
+   FOCUS — visible on every interactive element, always
+   ============================================================ */
+
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-accent);
+  outline-offset: var(--focus-ring-offset);
+  border-radius: var(--radius-sm);
+}
+
+
+/* ============================================================
+   MOTION PRIMITIVES
+   The only reveal patterns we ship. Add the class, let an
+   IntersectionObserver toggle [data-inview="true"].
+   ============================================================ */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(var(--reveal-distance));
+  transition:
+    opacity   var(--dur-slow) var(--ease-editorial),
+    transform var(--dur-slow) var(--ease-editorial);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+[data-reveal][data-inview="true"] { opacity: 1; transform: none; }
+
+[data-reveal="fade"]  { transform: none; }
+[data-reveal="left"]  { transform: translateX(calc(var(--reveal-distance) * -1)); }
+[data-reveal="right"] { transform: translateX(var(--reveal-distance)); }
+[data-reveal="scale"] { transform: scale(0.96); }
+
+/* Staggered children: set --reveal-delay per index in markup or JS,
+   in multiples of --stagger-base. */
+
+/* Text that reveals line by line. Wrap each line in a span. */
+.hb-reveal-lines { overflow: hidden; }
+.hb-reveal-lines > span {
+  display: block;
+  transform: translateY(110%);
+  transition: transform var(--dur-slower) var(--ease-editorial);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.hb-reveal-lines[data-inview="true"] > span { transform: none; }
