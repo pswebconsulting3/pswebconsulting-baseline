@@ -1,0 +1,672 @@
+/* ============================================================
+   PS WEB CONSULTING — HOUSE BASELINE · tokens.css
+
+   Three tiers, same idea as Figma variables:
+
+   1. PRIMITIVES     Every approved raw value. Never used directly
+                     by components. Same on every project.
+   2. PRESETS        Ready-made bundles a project picks ONE of:
+                     radius, density, type scale, elevation, body size.
+                     Switched with an attribute on <html>, e.g.
+                     <html data-radius="round" data-density="airy">
+   3. PROJECT TOKENS The names components actually read. Each one
+                     points at a primitive. Defaults below are the
+                     recommended industry-standard picks; the client
+                     design system overrides them from KICKOFF.md.
+
+   Per-device tokens have -d / -t / -m values (desktop / tablet /
+   mobile) that map 1:1 to Elementor's three device fields, and
+   resolve automatically at the Elementor breakpoints.
+
+   Breakpoints (Elementor core, desktop-first):
+     tablet  max-width: 1024px
+     mobile  max-width:  767px
+   Extended set (opt-in at kickoff): laptop max-width 1366px,
+   widescreen min-width 2400px. Literal values only — custom
+   properties cannot be used inside media queries.
+   ============================================================ */
+
+/* ============================================================
+   1. PRIMITIVES
+   ============================================================ */
+:root {
+  /* Spacing — 4px base, 8px rhythm. Name = px value. */
+  --space-0: 0;
+  --space-2: 0.125rem;
+  --space-4: 0.25rem;
+  --space-8: 0.5rem;
+  --space-12: 0.75rem;
+  --space-16: 1rem;
+  --space-20: 1.25rem;
+  --space-24: 1.5rem;
+  --space-32: 2rem;
+  --space-40: 2.5rem;
+  --space-48: 3rem;
+  --space-56: 3.5rem;
+  --space-64: 4rem;
+  --space-80: 5rem;
+  --space-96: 6rem;
+  --space-112: 7rem;
+  --space-128: 8rem;
+  --space-160: 10rem;
+  --space-192: 12rem;
+  --space-240: 15rem;
+
+  /* Font sizes — name = px value */
+  --font-size-12: 0.75rem;
+  --font-size-14: 0.875rem;
+  --font-size-16: 1rem;
+  --font-size-18: 1.125rem;
+  --font-size-20: 1.25rem;
+  --font-size-22: 1.375rem;
+  --font-size-24: 1.5rem;
+  --font-size-28: 1.75rem;
+  --font-size-32: 2rem;
+  --font-size-36: 2.25rem;
+  --font-size-40: 2.5rem;
+  --font-size-44: 2.75rem;
+  --font-size-48: 3rem;
+  --font-size-56: 3.5rem;
+  --font-size-64: 4rem;
+  --font-size-72: 4.5rem;
+  --font-size-80: 5rem;
+  --font-size-96: 6rem;
+  --font-size-120: 7.5rem;
+
+  /* Line heights — name = value × 100 */
+  --line-height-100: 1;
+  --line-height-110: 1.1;
+  --line-height-115: 1.15;
+  --line-height-120: 1.2;
+  --line-height-125: 1.25;
+  --line-height-130: 1.3;
+  --line-height-140: 1.4;
+  --line-height-150: 1.5;
+  --line-height-160: 1.6;
+  --line-height-170: 1.7;
+
+  /* Letter spacing — n = negative */
+  --letter-spacing-0: 0;
+  --letter-spacing-1: 0.01em;
+  --letter-spacing-2: 0.02em;
+  --letter-spacing-5: 0.05em;
+  --letter-spacing-10: 0.1em;
+  --letter-spacing-n3: -0.03em;
+  --letter-spacing-n2: -0.02em;
+  --letter-spacing-n1: -0.01em;
+
+  /* Font weights */
+  --font-weight-300: 300;
+  --font-weight-400: 400;
+  --font-weight-500: 500;
+  --font-weight-600: 600;
+  --font-weight-700: 700;
+  --font-weight-800: 800;
+
+  /* Widths — content containers and reading measures */
+  --width-320: 320px;
+  --width-480: 480px;
+  --width-560: 560px;
+  --width-640: 640px;
+  --width-720: 720px;
+  --width-800: 800px;
+  --width-960: 960px;
+  --width-1024: 1024px;
+  --width-1140: 1140px;
+  --width-1200: 1200px;
+  --width-1280: 1280px;
+  --width-1360: 1360px;
+  --width-1440: 1440px;
+  --width-1600: 1600px;
+  --width-1920: 1920px;
+
+  /* Radii */
+  --radius-0: 0px;
+  --radius-2: 2px;
+  --radius-4: 4px;
+  --radius-6: 6px;
+  --radius-8: 8px;
+  --radius-12: 12px;
+  --radius-16: 16px;
+  --radius-20: 20px;
+  --radius-24: 24px;
+  --radius-32: 32px;
+  --radius-full: 999px;
+
+  /* Border widths */
+  --border-1: 1px;
+  --border-1-5: 1.5px;
+  --border-2: 2px;
+  --border-3: 3px;
+
+  /* Shadows — tinted with the darkest neutral, never pure black.
+     Projects may retint --shadow-tint from their palette. */
+  --shadow-tint: 220 15% 10%;
+  --shadow-0: none;
+  --shadow-1: 0 1px 2px hsl(var(--shadow-tint) / 0.06), 0 1px 1px hsl(var(--shadow-tint) / 0.04);
+  --shadow-2: 0 2px 8px hsl(var(--shadow-tint) / 0.08);
+  --shadow-3: 0 8px 24px hsl(var(--shadow-tint) / 0.10);
+  --shadow-4: 0 16px 40px hsl(var(--shadow-tint) / 0.12);
+  --shadow-5: 0 32px 72px hsl(var(--shadow-tint) / 0.16);
+
+  /* Icon sizes */
+  --icon-12: 12px;
+  --icon-16: 16px;
+  --icon-20: 20px;
+  --icon-24: 24px;
+  --icon-32: 32px;
+  --icon-40: 40px;
+  --icon-48: 48px;
+  --icon-64: 64px;
+
+  /* Control heights — 44px is the touch-target floor on touch devices */
+  --control-32: 32px;
+  --control-36: 36px;
+  --control-40: 40px;
+  --control-44: 44px;
+  --control-48: 48px;
+  --control-56: 56px;
+  --control-64: 64px;
+
+  /* Aspect ratios */
+  --ratio-1-1: 1 / 1;
+  --ratio-4-5: 4 / 5;
+  --ratio-3-4: 3 / 4;
+  --ratio-2-3: 2 / 3;
+  --ratio-4-3: 4 / 3;
+  --ratio-3-2: 3 / 2;
+  --ratio-16-9: 16 / 9;
+  --ratio-21-9: 21 / 9;
+
+  /* Motion — FIXED HOUSE RULES, not per project.
+     Duration by distance. Transform and opacity only. */
+  --dur-instant: 90ms;   /* state flips, checkbox, toggle        */
+  --dur-fast: 180ms;     /* hover, focus, colour change          */
+  --dur-base: 280ms;     /* dropdowns, accordions, tooltips      */
+  --dur-slow: 480ms;     /* scroll reveals, card entrances       */
+  --dur-slower: 700ms;   /* hero sequences, large transforms     */
+  --dur-page: 900ms;     /* page transitions, orchestrated intro */
+
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);         /* entrances   */
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);          /* exits       */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);  /* playful pop */
+  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);  /* long reveals*/
+
+  --stagger-tight: 40ms;
+  --stagger-base: 80ms;
+  --stagger-loose: 140ms;
+  --reveal-distance: 24px;
+  --reveal-distance-lg: 40px;
+
+  /* Z-index layers — named, never magic numbers */
+  --z-base: 0;
+  --z-raised: 10;
+  --z-sticky: 100;
+  --z-header: 200;
+  --z-dropdown: 300;
+  --z-overlay: 400;
+  --z-modal: 500;
+  --z-toast: 600;
+
+  /* Opacity */
+  --opacity-disabled: 0.5;
+  --opacity-overlay: 0.6;
+}
+
+/* ============================================================
+   2. PRESETS — pick one of each at kickoff.
+   The first listed in each group is the default (no attribute).
+   ============================================================ */
+
+/* ---- Type scale: standard (≈1.25) · compact (≈1.2) · expressive (≈1.333)
+   Values are desktop / tablet / mobile. Body stays 16px on all. */
+:root, :root[data-type-scale="standard"] {
+  --text-display-d: var(--font-size-72);
+  --text-display-t: var(--font-size-56);
+  --text-display-m: var(--font-size-44);
+  --text-h1-d: var(--font-size-56);
+  --text-h1-t: var(--font-size-44);
+  --text-h1-m: var(--font-size-36);
+  --text-h2-d: var(--font-size-40);
+  --text-h2-t: var(--font-size-32);
+  --text-h2-m: var(--font-size-28);
+  --text-h3-d: var(--font-size-32);
+  --text-h3-t: var(--font-size-28);
+  --text-h3-m: var(--font-size-24);
+  --text-h4-d: var(--font-size-24);
+  --text-h4-t: var(--font-size-22);
+  --text-h4-m: var(--font-size-20);
+  --text-h5-d: var(--font-size-20);
+  --text-h5-t: var(--font-size-18);
+  --text-h5-m: var(--font-size-18);
+  --text-h6-d: var(--font-size-18);
+  --text-h6-t: var(--font-size-16);
+  --text-h6-m: var(--font-size-16);
+}
+:root[data-type-scale="compact"] {
+  --text-display-d: var(--font-size-56);
+  --text-display-t: var(--font-size-48);
+  --text-display-m: var(--font-size-40);
+  --text-h1-d: var(--font-size-48);
+  --text-h1-t: var(--font-size-40);
+  --text-h1-m: var(--font-size-32);
+  --text-h2-d: var(--font-size-36);
+  --text-h2-t: var(--font-size-32);
+  --text-h2-m: var(--font-size-28);
+  --text-h3-d: var(--font-size-28);
+  --text-h3-t: var(--font-size-24);
+  --text-h3-m: var(--font-size-22);
+  --text-h4-d: var(--font-size-22);
+  --text-h4-t: var(--font-size-20);
+  --text-h4-m: var(--font-size-18);
+  --text-h5-d: var(--font-size-18);
+  --text-h5-t: var(--font-size-18);
+  --text-h5-m: var(--font-size-16);
+  --text-h6-d: var(--font-size-16);
+  --text-h6-t: var(--font-size-16);
+  --text-h6-m: var(--font-size-16);
+}
+:root[data-type-scale="expressive"] {
+  --text-display-d: var(--font-size-96);
+  --text-display-t: var(--font-size-72);
+  --text-display-m: var(--font-size-48);
+  --text-h1-d: var(--font-size-72);
+  --text-h1-t: var(--font-size-56);
+  --text-h1-m: var(--font-size-40);
+  --text-h2-d: var(--font-size-48);
+  --text-h2-t: var(--font-size-40);
+  --text-h2-m: var(--font-size-32);
+  --text-h3-d: var(--font-size-36);
+  --text-h3-t: var(--font-size-32);
+  --text-h3-m: var(--font-size-28);
+  --text-h4-d: var(--font-size-28);
+  --text-h4-t: var(--font-size-24);
+  --text-h4-m: var(--font-size-22);
+  --text-h5-d: var(--font-size-22);
+  --text-h5-t: var(--font-size-20);
+  --text-h5-m: var(--font-size-18);
+  --text-h6-d: var(--font-size-18);
+  --text-h6-t: var(--font-size-18);
+  --text-h6-m: var(--font-size-16);
+}
+
+/* ---- Body size: 16 (default) · 18 (reading-heavy sites, desktop only) */
+:root, :root[data-body-size="16"] {
+  --text-body-d: var(--font-size-16);
+  --text-body-t: var(--font-size-16);
+  --text-body-m: var(--font-size-16);
+  --text-lead-d: var(--font-size-20);
+  --text-lead-t: var(--font-size-18);
+  --text-lead-m: var(--font-size-18);
+}
+:root[data-body-size="18"] {
+  --text-body-d: var(--font-size-18);
+  --text-body-t: var(--font-size-16);
+  --text-body-m: var(--font-size-16);
+  --text-lead-d: var(--font-size-22);
+  --text-lead-t: var(--font-size-20);
+  --text-lead-m: var(--font-size-18);
+}
+
+/* ---- Density: balanced · compact · airy
+   Section padding, card gaps by column count, section-header gap, card padding. */
+:root, :root[data-density="balanced"] {
+  --section-y-tight-d: var(--space-64);
+  --section-y-tight-t: var(--space-48);
+  --section-y-tight-m: var(--space-40);
+  --section-y-d: var(--space-96);
+  --section-y-t: var(--space-80);
+  --section-y-m: var(--space-64);
+  --section-y-loose-d: var(--space-128);
+  --section-y-loose-t: var(--space-96);
+  --section-y-loose-m: var(--space-80);
+  --gap-grid-2-d: var(--space-32);
+  --gap-grid-2-t: var(--space-24);
+  --gap-grid-2-m: var(--space-16);
+  --gap-grid-3-d: var(--space-32);
+  --gap-grid-3-t: var(--space-24);
+  --gap-grid-3-m: var(--space-16);
+  --gap-grid-4-d: var(--space-24);
+  --gap-grid-4-t: var(--space-24);
+  --gap-grid-4-m: var(--space-16);
+  --gap-section-header-d: var(--space-48);
+  --gap-section-header-t: var(--space-40);
+  --gap-section-header-m: var(--space-32);
+  --pad-card-d: var(--space-32);
+  --pad-card-t: var(--space-24);
+  --pad-card-m: var(--space-24);
+}
+:root[data-density="compact"] {
+  --section-y-tight-d: var(--space-48);
+  --section-y-tight-t: var(--space-40);
+  --section-y-tight-m: var(--space-32);
+  --section-y-d: var(--space-64);
+  --section-y-t: var(--space-56);
+  --section-y-m: var(--space-48);
+  --section-y-loose-d: var(--space-96);
+  --section-y-loose-t: var(--space-80);
+  --section-y-loose-m: var(--space-64);
+  --gap-grid-2-d: var(--space-24);
+  --gap-grid-2-t: var(--space-16);
+  --gap-grid-2-m: var(--space-16);
+  --gap-grid-3-d: var(--space-24);
+  --gap-grid-3-t: var(--space-16);
+  --gap-grid-3-m: var(--space-16);
+  --gap-grid-4-d: var(--space-16);
+  --gap-grid-4-t: var(--space-16);
+  --gap-grid-4-m: var(--space-16);
+  --gap-section-header-d: var(--space-32);
+  --gap-section-header-t: var(--space-32);
+  --gap-section-header-m: var(--space-24);
+  --pad-card-d: var(--space-24);
+  --pad-card-t: var(--space-20);
+  --pad-card-m: var(--space-16);
+}
+:root[data-density="airy"] {
+  --section-y-tight-d: var(--space-80);
+  --section-y-tight-t: var(--space-64);
+  --section-y-tight-m: var(--space-48);
+  --section-y-d: var(--space-128);
+  --section-y-t: var(--space-96);
+  --section-y-m: var(--space-80);
+  --section-y-loose-d: var(--space-160);
+  --section-y-loose-t: var(--space-128);
+  --section-y-loose-m: var(--space-96);
+  --gap-grid-2-d: var(--space-48);
+  --gap-grid-2-t: var(--space-32);
+  --gap-grid-2-m: var(--space-24);
+  --gap-grid-3-d: var(--space-40);
+  --gap-grid-3-t: var(--space-32);
+  --gap-grid-3-m: var(--space-24);
+  --gap-grid-4-d: var(--space-32);
+  --gap-grid-4-t: var(--space-24);
+  --gap-grid-4-m: var(--space-16);
+  --gap-section-header-d: var(--space-64);
+  --gap-section-header-t: var(--space-48);
+  --gap-section-header-m: var(--space-40);
+  --pad-card-d: var(--space-40);
+  --pad-card-t: var(--space-32);
+  --pad-card-m: var(--space-24);
+}
+
+/* ---- Radius: soft (8–12px) · sharp (0–4px) · round (16px+, pill buttons)
+   Nested-corner rule: inner radius = outer radius − padding (min 0). */
+:root, :root[data-radius="soft"] {
+  --radius-button: var(--radius-8);
+  --radius-input: var(--radius-8);
+  --radius-card: var(--radius-12);
+  --radius-image: var(--radius-12);
+  --radius-badge: var(--radius-4);
+  --radius-modal: var(--radius-16);
+  --radius-card-inner: var(--radius-8);
+}
+:root[data-radius="sharp"] {
+  --radius-button: var(--radius-2);
+  --radius-input: var(--radius-2);
+  --radius-card: var(--radius-4);
+  --radius-image: var(--radius-0);
+  --radius-badge: var(--radius-2);
+  --radius-modal: var(--radius-4);
+  --radius-card-inner: var(--radius-0);
+}
+:root[data-radius="round"] {
+  --radius-button: var(--radius-full);
+  --radius-input: var(--radius-12);
+  --radius-card: var(--radius-24);
+  --radius-image: var(--radius-24);
+  --radius-badge: var(--radius-full);
+  --radius-modal: var(--radius-24);
+  --radius-card-inner: var(--radius-16);
+}
+
+/* ---- Elevation: subtle · flat (borders only) · lifted */
+:root, :root[data-elevation="subtle"] {
+  --shadow-card: var(--shadow-1);
+  --shadow-card-hover: var(--shadow-3);
+  --shadow-header: var(--shadow-2);
+  --shadow-dropdown: var(--shadow-3);
+  --shadow-modal: var(--shadow-5);
+}
+:root[data-elevation="flat"] {
+  --shadow-card: var(--shadow-0);
+  --shadow-card-hover: var(--shadow-0);
+  --shadow-header: var(--shadow-0);
+  --shadow-dropdown: var(--shadow-2);
+  --shadow-modal: var(--shadow-4);
+}
+:root[data-elevation="lifted"] {
+  --shadow-card: var(--shadow-2);
+  --shadow-card-hover: var(--shadow-4);
+  --shadow-header: var(--shadow-2);
+  --shadow-dropdown: var(--shadow-4);
+  --shadow-modal: var(--shadow-5);
+}
+
+/* ============================================================
+   3. PROJECT TOKENS — recommended defaults.
+   Override in the client design system from KICKOFF.md answers.
+   Components read ONLY these names.
+   ============================================================ */
+:root {
+  /* Layout */
+  --content-width: var(--width-1200);        /* options 1140 / 1200 / 1280 / 1440 */
+  --content-width-narrow: var(--width-720);  /* long-form reading, forms          */
+  --content-width-wide: var(--width-1440);   /* feature sections                  */
+  --gutter-d: var(--space-40);
+  --gutter-t: var(--space-32);
+  --gutter-m: var(--space-20);
+  --header-height-d: var(--space-80);
+  --header-height-t: 72px;
+  --header-height-m: var(--space-64);
+  --logo-height-d: var(--space-40);
+  --logo-height-t: 36px;
+  --logo-height-m: var(--space-32);
+  --measure-body: 68ch;      /* 60–75ch is the readable range */
+  --measure-heading: 22ch;
+  --grid-columns: 12;
+
+  /* Vertical rhythm inside sections (fixed, not per device) */
+  --gap-eyebrow-heading: var(--space-12);
+  --gap-heading-text: var(--space-16);
+  --gap-text-actions: var(--space-32);
+  --gap-paragraph: var(--space-16);
+  --gap-stack: var(--space-16);
+  --gap-inline: var(--space-12);
+  --gap-form-fields: var(--space-24);
+  --gap-label-input: var(--space-8);
+
+  /* Line heights and tracking per role */
+  --line-height-display: var(--line-height-110);
+  --line-height-h1: var(--line-height-110);
+  --line-height-h2: var(--line-height-115);
+  --line-height-h3: var(--line-height-120);
+  --line-height-h4: var(--line-height-130);
+  --line-height-h5: var(--line-height-140);
+  --line-height-h6: var(--line-height-140);
+  --line-height-lead: var(--line-height-150);
+  --line-height-body: var(--line-height-160);
+  --line-height-small: var(--line-height-150);
+  --letter-spacing-display: var(--letter-spacing-n2);
+  --letter-spacing-heading: var(--letter-spacing-n1);
+  --letter-spacing-body: var(--letter-spacing-0);
+  --letter-spacing-eyebrow: var(--letter-spacing-10);
+
+  /* Fixed small text */
+  --text-small: var(--font-size-14);
+  --text-xs: var(--font-size-12);
+
+  /* Weights (brand may change) */
+  --weight-heading: var(--font-weight-600);
+  --weight-body: var(--font-weight-400);
+  --weight-strong: var(--font-weight-600);
+  --weight-button: var(--font-weight-600);
+
+  /* Buttons */
+  --button-height-sm: var(--control-40);
+  --button-height-md: var(--control-48);
+  --button-height-lg: var(--control-56);
+  --button-pad-x-sm: var(--space-16);
+  --button-pad-x-md: var(--space-24);
+  --button-pad-x-lg: var(--space-32);
+  --button-text-sm: var(--font-size-14);
+  --button-text-md: var(--font-size-16);
+  --button-text-lg: var(--font-size-18);
+  --button-icon: var(--icon-20);
+
+  /* Form fields — text is 16px minimum so iOS never zooms */
+  --input-height: var(--control-48);
+  --input-pad-x: var(--space-16);
+  --input-text: var(--font-size-16);
+  --input-border: var(--border-1);
+
+  /* Icons */
+  --icon-inline: var(--icon-20);
+  --icon-feature: var(--icon-32);
+
+  /* Images — default ratios per use */
+  --ratio-hero: var(--ratio-16-9);
+  --ratio-card: var(--ratio-3-2);
+  --ratio-product: var(--ratio-1-1);
+  --ratio-portrait: var(--ratio-4-5);
+
+  /* Borders */
+  --border-default: var(--border-1);
+  --border-emphasis: var(--border-2);
+
+  /* Focus */
+  --focus-ring-width: 3px;
+  --focus-ring-offset: 2px;
+}
+
+/* ============================================================
+   BRAND LAYER — PLACEHOLDERS. FILL PER PROJECT.
+   Deliberately greyscale so nothing here can be mistaken for a
+   house palette. Names map to Elementor Global Colors / Fonts
+   (see ELEMENTOR-MAPPING.md).
+   ============================================================ */
+:root {
+  /* Fonts — Elementor: Primary = heading, Secondary = subheading,
+     Text = body, Accent = buttons/labels. One family is allowed. */
+  --font-heading: /* CLIENT */ Georgia, serif;
+  --font-subheading: var(--font-heading);
+  --font-body: /* CLIENT */ system-ui, sans-serif;
+  --font-accent: var(--font-body);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Core palette */
+  --color-primary: /* CLIENT */ #2b2b2b;
+  --color-on-primary: /* CLIENT */ #ffffff;
+  --color-secondary: /* CLIENT */ #5a5a5a;
+  --color-on-secondary: /* CLIENT */ #ffffff;
+  --color-accent: /* CLIENT */ #3d3d3d;
+
+  /* Neutrals and surfaces */
+  --color-bg: /* CLIENT */ #ffffff;
+  --color-surface: /* CLIENT */ #f4f4f4;
+  --color-surface-alt: /* CLIENT */ #e9e9e9;
+  --color-inverse: /* CLIENT */ #1a1a1a;
+  --color-text: /* CLIENT */ #1a1a1a;
+  --color-text-muted: /* CLIENT */ #5c5c5c;
+  --color-on-inverse: /* CLIENT */ #ffffff;
+  --color-border: /* CLIENT */ #d6d6d6;
+  --color-border-strong: /* CLIENT */ #8a8a8a;
+
+  /* Semantic — derive from the client palette */
+  --color-success: /* CLIENT */ #2e6b3f;
+  --color-warning: /* CLIENT */ #7a5a12;
+  --color-error: /* CLIENT */ #9b2c2c;
+  --color-info: /* CLIENT */ #2c4f7a;
+
+  /* Derived states — override if the brand defines its own */
+  --color-primary-hover: color-mix(in oklch, var(--color-primary), black 12%);
+  --color-secondary-hover: color-mix(in oklch, var(--color-secondary), black 12%);
+  --color-focus: var(--color-primary);
+  --color-overlay: hsl(var(--shadow-tint) / var(--opacity-overlay));
+}
+
+/* ============================================================
+   DEVICE RESOLUTION — do not edit. Picks -d / -t / -m per breakpoint.
+   ============================================================ */
+:root {
+  --text-display: var(--text-display-d);
+  --text-h1: var(--text-h1-d);
+  --text-h2: var(--text-h2-d);
+  --text-h3: var(--text-h3-d);
+  --text-h4: var(--text-h4-d);
+  --text-h5: var(--text-h5-d);
+  --text-h6: var(--text-h6-d);
+  --text-body: var(--text-body-d);
+  --text-lead: var(--text-lead-d);
+  --section-y-tight: var(--section-y-tight-d);
+  --section-y: var(--section-y-d);
+  --section-y-loose: var(--section-y-loose-d);
+  --gap-grid-2: var(--gap-grid-2-d);
+  --gap-grid-3: var(--gap-grid-3-d);
+  --gap-grid-4: var(--gap-grid-4-d);
+  --gap-section-header: var(--gap-section-header-d);
+  --pad-card: var(--pad-card-d);
+  --gutter: var(--gutter-d);
+  --header-height: var(--header-height-d);
+  --logo-height: var(--logo-height-d);
+}
+@media (max-width: 1024px) {
+  :root {
+    --text-display: var(--text-display-t);
+    --text-h1: var(--text-h1-t);
+    --text-h2: var(--text-h2-t);
+    --text-h3: var(--text-h3-t);
+    --text-h4: var(--text-h4-t);
+    --text-h5: var(--text-h5-t);
+    --text-h6: var(--text-h6-t);
+    --text-body: var(--text-body-t);
+    --text-lead: var(--text-lead-t);
+    --section-y-tight: var(--section-y-tight-t);
+    --section-y: var(--section-y-t);
+    --section-y-loose: var(--section-y-loose-t);
+    --gap-grid-2: var(--gap-grid-2-t);
+    --gap-grid-3: var(--gap-grid-3-t);
+    --gap-grid-4: var(--gap-grid-4-t);
+    --gap-section-header: var(--gap-section-header-t);
+    --pad-card: var(--pad-card-t);
+    --gutter: var(--gutter-t);
+    --header-height: var(--header-height-t);
+    --logo-height: var(--logo-height-t);
+  }
+}
+@media (max-width: 767px) {
+  :root {
+    --text-display: var(--text-display-m);
+    --text-h1: var(--text-h1-m);
+    --text-h2: var(--text-h2-m);
+    --text-h3: var(--text-h3-m);
+    --text-h4: var(--text-h4-m);
+    --text-h5: var(--text-h5-m);
+    --text-h6: var(--text-h6-m);
+    --text-body: var(--text-body-m);
+    --text-lead: var(--text-lead-m);
+    --section-y-tight: var(--section-y-tight-m);
+    --section-y: var(--section-y-m);
+    --section-y-loose: var(--section-y-loose-m);
+    --gap-grid-2: var(--gap-grid-2-m);
+    --gap-grid-3: var(--gap-grid-3-m);
+    --gap-grid-4: var(--gap-grid-4-m);
+    --gap-section-header: var(--gap-section-header-m);
+    --pad-card: var(--pad-card-m);
+    --gutter: var(--gutter-m);
+    --header-height: var(--header-height-m);
+    --logo-height: var(--logo-height-m);
+  }
+}
+
+/* ============================================================
+   REDUCED MOTION — non-negotiable, ships on every project
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
