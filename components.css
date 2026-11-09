@@ -265,6 +265,7 @@ a:hover { color: var(--color-primary-hover); }
   transition: box-shadow var(--dur-base) var(--ease-standard), background-color var(--dur-base) var(--ease-standard);
 }
 .hb-header__inner { display: flex; align-items: center; justify-content: space-between; gap: var(--space-32); min-height: var(--header-height); }
+.hb-header__logo { display: inline-flex; align-items: center; color: inherit; text-decoration: none; }
 .hb-header__logo img, .hb-header__logo svg { height: var(--logo-height); width: auto; }
 .hb-header__actions { display: flex; align-items: center; gap: var(--space-16); }
 /* Added by JS after scrolling past the hero. Shadow only — never animate height. */
@@ -305,7 +306,8 @@ a:hover { color: var(--color-primary-hover); }
   opacity: 0; transform: translateY(calc(var(--space-16) * -1)); pointer-events: none;
   transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
 }
-.hb-mobile-menu[data-open="true"] { opacity: 1; transform: none; pointer-events: auto; }
+.hb-mobile-menu { visibility: hidden; transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out), visibility 0s linear var(--dur-base); }
+.hb-mobile-menu[data-open="true"] { opacity: 1; transform: none; pointer-events: auto; visibility: visible; transition-delay: 0s; }
 .hb-mobile-menu a { display: flex; align-items: center; min-height: var(--control-56); font-size: var(--text-h5); color: var(--color-text); text-decoration: none; border-bottom: var(--border-default) solid var(--color-border); }
 @media (max-width: 1024px) {
   .hb-header .hb-nav { display: none; }
@@ -527,7 +529,8 @@ a:hover { color: var(--color-primary-hover); }
 .hb-qty input { width: var(--control-48); border: 0; text-align: center; font-size: var(--input-text); background: none; }
 
 .hb-mini-cart { position: fixed; inset: 0 0 0 auto; z-index: var(--z-modal); width: min(100%, var(--width-480)); display: flex; flex-direction: column; background: var(--color-bg); box-shadow: var(--shadow-modal); transform: translateX(100%); transition: transform var(--dur-base) var(--ease-out); }
-.hb-mini-cart[data-open="true"] { transform: none; }
+.hb-mini-cart { visibility: hidden; transition: transform var(--dur-base) var(--ease-out), visibility 0s linear var(--dur-base); }
+.hb-mini-cart[data-open="true"] { transform: none; visibility: visible; transition-delay: 0s; }
 
 
 /* ============================================================
